@@ -43,6 +43,9 @@ namespace employeehub_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("departmentName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

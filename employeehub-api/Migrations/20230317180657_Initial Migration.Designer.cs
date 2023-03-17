@@ -12,7 +12,7 @@ using employeehub_api.Data;
 namespace employeehub_api.Migrations
 {
     [DbContext(typeof(APIDbContext))]
-    [Migration("20230317174558_Initial Migration")]
+    [Migration("20230317180657_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -44,6 +44,9 @@ namespace employeehub_api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("departmentName")
