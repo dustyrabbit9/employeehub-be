@@ -17,19 +17,21 @@ namespace employeehub_api.Controllers
         {
             this.dbContext = dbContext;
         }
-
+        // Retrieve all Employees 
         [HttpGet("employee/getAllEmployees")]
         public IActionResult getAllEmployees()
         {
             return Ok(dbContext.Employee.ToList());
         }
-
+        
+        // Retrieve all Departments 
         [HttpGet("department/getAllDepartments")]
         public IActionResult getAllDepartments()
         {
             return Ok(dbContext.Department.ToList());
         }
 
+        // Retrieve specific Employee using employee Id
         [HttpGet]
         [Route("employee/getOneEmployee/{id:guid}")]
         public async Task<IActionResult> getOneEmployee([FromRoute] Guid id)
@@ -44,6 +46,7 @@ namespace employeehub_api.Controllers
             return Ok(employee);
         }
 
+        // Retrieve specific Department using Department ID
         [HttpGet]
         [Route("employee/getOneDepartment/{id:guid}")]
         public async Task<IActionResult> getOneDepartment([FromRoute] Guid id)
@@ -58,6 +61,7 @@ namespace employeehub_api.Controllers
             return Ok(department);
         }
 
+        // Retrieve all Employees relating to a Department using departmentName
         [HttpGet]
         [Route("employee/getEmployeeByDepartment/{departmentName}")]
         public async Task<IActionResult> getEmployeeByDepartment([FromRoute] string departmentName)
@@ -72,7 +76,7 @@ namespace employeehub_api.Controllers
             return Ok(employees);
         }
 
-
+        // Add an Employee 
         [HttpPost("employee/addEmployee")]
         public async Task<IActionResult> addEmployee(AddEmployeeRequest addEmployeeRequest) 
         {
@@ -93,7 +97,7 @@ namespace employeehub_api.Controllers
             return Ok(employee);
         }
 
-
+        // Add a Department 
         [HttpPost("department/addDepartment")]
 
         public async Task<IActionResult> addDepartment(AddDepartmentRequest addDepartmentRequest)
@@ -110,6 +114,7 @@ namespace employeehub_api.Controllers
             return Ok(department);
         }
 
+        // Update an Employee based on employee Id
         [HttpPut]
         [Route("employee/updateEmployee/{id:guid}")]
 
@@ -134,6 +139,7 @@ namespace employeehub_api.Controllers
             return NotFound();
         }
 
+        // Update a Department based on Department Id
         [HttpPut]
         [Route("department/updateDepartment/{id:guid}")]
 
@@ -153,6 +159,7 @@ namespace employeehub_api.Controllers
             return NotFound();
         }
 
+        // Update a Department based on departmentName
         [HttpPut]
         [Route("department/updateDepartment/{departmentName}")]
         public async Task<IActionResult> UpdateDepartment([FromRoute] string departmentName, UpdateDepartmentRequest updateDepartmentRequest)
@@ -170,6 +177,7 @@ namespace employeehub_api.Controllers
             return NotFound();
         }
 
+        // Delete an Employee
         [HttpDelete]
         [Route("employee/deleteEmployee/{id:guid}")]
         public async Task<IActionResult> deleteEmployee(Guid id)
@@ -186,6 +194,7 @@ namespace employeehub_api.Controllers
             return NotFound();
         }
 
+        // Delete a Department
         [HttpDelete]
         [Route("department/deleteDepartment/{id:guid}")]
         public async Task<IActionResult> deleteDepartment(Guid id)
