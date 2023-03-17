@@ -10,7 +10,7 @@ namespace employeehub_api.Data
         }
 
         public DbSet<Employee> Employee { get; set; }
-        public DbSet<Department> Departments { get; set; }
+        public DbSet<Department> Department { get; set; }
 
 
     }
