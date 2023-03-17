@@ -11,7 +11,6 @@ namespace employeehub_api.Models
         public double salary { get; set; }
         public DateTime dob { get; set; }
 
-        //public string departmentName { get; set; }
         public Guid departmentId { get; set; }
     }
 }
