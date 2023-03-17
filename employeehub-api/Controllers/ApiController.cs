@@ -16,7 +16,6 @@ namespace employeehub_api.Controllers
         public EmployeeHubController(APIDbContext dbContext)
         {
             this.dbContext = dbContext;
-            this.dbContext = dbContext;
         }
 
         [HttpGet("employee/getAllEmployees")]

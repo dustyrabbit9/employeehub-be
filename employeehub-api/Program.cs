@@ -10,7 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<APIDbContext>(options => options.UseInMemoryDatabase("MyDb"));
+//builder.Services.AddDbContext<APIDbContext>(options => options.UseInMemoryDatabase("MyDb"));
+builder.Services.AddDbContext<APIDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("employeehubApiConnectionString")));
 
 var app = builder.Build();
 
