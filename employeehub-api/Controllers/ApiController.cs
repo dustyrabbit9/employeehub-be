@@ -82,10 +82,10 @@ namespace employeehub_api.Controllers
         {
             // Check if entered department exists
             var department = await dbContext.Department.FindAsync(addEmployeeRequest.DepartmentId);
-            //var department = await dbContext.Department.FirstOrDefaultAsync(d => d.Id == addEmployeeRequest.DepartmentId);
+
             if (department == null)
             {
-                return NotFound();
+                return NotFound("Department Not Found");
             }
 
             var employee = new Employee()
@@ -98,6 +98,11 @@ namespace employeehub_api.Controllers
                 dob = addEmployeeRequest.dob,
                 departmentId = addEmployeeRequest.DepartmentId
             };
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             await dbContext.Employee.AddAsync(employee);
             await dbContext.SaveChangesAsync();
@@ -145,7 +150,7 @@ namespace employeehub_api.Controllers
        
             }
 
-            return NotFound();
+            return NotFound("Employee Not Found");
         }
 
         // Update a Department based on Department Id
@@ -165,7 +170,7 @@ namespace employeehub_api.Controllers
 
             }
 
-            return NotFound();
+            return NotFound("Department Not Found");
         }
 
         // Update a Department based on departmentName
@@ -183,10 +188,10 @@ namespace employeehub_api.Controllers
                 return Ok(department);
             }
 
-            return NotFound();
+            return NotFound("Department Not Found");
         }
 
-        // Delete an Employee
+        // Delete an Employee using employeeId
         [HttpDelete]
         [Route("employee/deleteEmployee/{id:guid}")]
         public async Task<IActionResult> deleteEmployee(Guid id)
@@ -200,10 +205,10 @@ namespace employeehub_api.Controllers
                 return Ok(employee);
             }
 
-            return NotFound();
+            return NotFound("Employee Not Found");
         }
 
-        // Delete a Department
+        // Delete a Department using departmentId
         [HttpDelete]
         [Route("department/deleteDepartment/{id:guid}")]
         public async Task<IActionResult> deleteDepartment(Guid id)
@@ -217,7 +222,7 @@ namespace employeehub_api.Controllers
                 return Ok(department);
             }
 
-            return NotFound();
+            return NotFound("Department Not Found");
         }
 
 

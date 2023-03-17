@@ -1,4 +1,6 @@
-﻿namespace employeehub_api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace employeehub_api.Models
 {
     public class Employee
     {
