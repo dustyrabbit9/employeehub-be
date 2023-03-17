@@ -9,7 +9,9 @@ namespace employeehub_api.Models
         public string lastName { get; set; }
         public string email { get; set; }
         public double salary { get; set; }
+
         public DateTime dob { get; set; }
+        public int age { get; set; }
 
         public Guid departmentId { get; set; }
     }

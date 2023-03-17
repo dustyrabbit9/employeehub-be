@@ -12,7 +12,7 @@ using employeehub_api.Data;
 namespace employeehub_api.Migrations
 {
     [DbContext(typeof(APIDbContext))]
-    [Migration("20230317180657_Initial Migration")]
+    [Migration("20230317211354_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -46,12 +46,11 @@ namespace employeehub_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("age")
+                        .HasColumnType("int");
 
-                    b.Property<string>("departmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("departmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("dob")
                         .HasColumnType("datetime2");

@@ -43,12 +43,11 @@ namespace employeehub_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("age")
+                        .HasColumnType("int");
 
-                    b.Property<string>("departmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("departmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("dob")
                         .HasColumnType("datetime2");

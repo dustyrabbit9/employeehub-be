@@ -99,6 +99,8 @@ namespace employeehub_api.Controllers
                 departmentId = addEmployeeRequest.DepartmentId
             };
 
+            employee.age = (int)((DateTime.Now - employee.dob).TotalDays / 365.242199);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -144,6 +146,8 @@ namespace employeehub_api.Controllers
                 employee.salary = updateEmployeeRequest.salary;
                 employee.dob = updateEmployeeRequest.dob;
                 //employee.departmentName = updateEmployeeRequest.departmentName;
+
+                employee.age = (int)((DateTime.Now - employee.dob).TotalDays / 365.242199);
 
                 await dbContext.SaveChangesAsync();
                 return Ok(employee);
