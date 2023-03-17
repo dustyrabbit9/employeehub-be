@@ -59,6 +59,20 @@ namespace employeehub_api.Controllers
             return Ok(department);
         }
 
+        [HttpGet]
+        [Route("employee/getEmployeeByDepartment/{departmentName}")]
+        public async Task<IActionResult> getEmployeeByDepartment([FromRoute] string departmentName)
+        {
+            var employees = await dbContext.Employee.Where(e => e.departmentName == departmentName).ToListAsync();
+
+            if (employees == null || employees.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(employees);
+        }
+
 
         [HttpPost("employee/addEmployee")]
         public async Task<IActionResult> addEmployee(AddEmployeeRequest addEmployeeRequest) 
@@ -157,6 +171,37 @@ namespace employeehub_api.Controllers
             return NotFound();
         }
 
+        [HttpDelete]
+        [Route("employee/deleteEmployee/{id:guid}")]
+        public async Task<IActionResult> deleteEmployee(Guid id)
+        {
+            var employee = await dbContext.Employee.FindAsync(id);
+            if (employee != null)
+            {
+                dbContext.Remove(employee);
+                await dbContext.SaveChangesAsync();
+
+                return Ok(employee);
+            }
+
+            return NotFound();
+        }
+
+        [HttpDelete]
+        [Route("department/deleteDepartment/{id:guid}")]
+        public async Task<IActionResult> deleteDepartment(Guid id)
+        {
+            var department = await dbContext.Department.FindAsync(id);
+            if (department != null)
+            {
+                dbContext.Remove(department);
+                await dbContext.SaveChangesAsync();
+
+                return Ok(department);
+            }
+
+            return NotFound();
+        }
 
 
 
