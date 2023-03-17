@@ -8,6 +8,8 @@
         public double salary { get; set; }
         public DateTime dob { get; set; }
 
-        public string departmentName { get; set; }
+        //public string departmentName { get; set; }
+        public Guid DepartmentId { get; set; }
+
     }
 }

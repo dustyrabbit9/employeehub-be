@@ -61,12 +61,12 @@ namespace employeehub_api.Controllers
             return Ok(department);
         }
 
-        // Retrieve all Employees relating to a Department using departmentName
+        // Retrieve all Employees relating to a Department using departmentId
         [HttpGet]
-        [Route("employee/getEmployeeByDepartment/{departmentName}")]
-        public async Task<IActionResult> getEmployeeByDepartment([FromRoute] string departmentName)
+        [Route("employee/getEmployeeByDepartmentId/{id:guid}")]
+        public async Task<IActionResult> getEmployeeByDepartment([FromRoute] Guid id)
         {
-            var employees = await dbContext.Employee.Where(e => e.departmentName == departmentName).ToListAsync();
+            var employees = await dbContext.Employee.Where(e => e.departmentId == id).ToListAsync();
 
             if (employees == null || employees.Count == 0)
             {
@@ -78,8 +78,16 @@ namespace employeehub_api.Controllers
 
         // Add an Employee 
         [HttpPost("employee/addEmployee")]
-        public async Task<IActionResult> addEmployee(AddEmployeeRequest addEmployeeRequest) 
+        public async Task<IActionResult> addEmployee(AddEmployeeRequest addEmployeeRequest)
         {
+            // Check if entered department exists
+            var department = await dbContext.Department.FindAsync(addEmployeeRequest.DepartmentId);
+            //var department = await dbContext.Department.FirstOrDefaultAsync(d => d.Id == addEmployeeRequest.DepartmentId);
+            if (department == null)
+            {
+                return NotFound();
+            }
+
             var employee = new Employee()
             {
                 Id = Guid.NewGuid(),
@@ -88,7 +96,7 @@ namespace employeehub_api.Controllers
                 email = addEmployeeRequest.email,
                 salary = addEmployeeRequest.salary,
                 dob = addEmployeeRequest.dob,
-                departmentName = addEmployeeRequest.departmentName
+                departmentId = addEmployeeRequest.DepartmentId
             };
 
             await dbContext.Employee.AddAsync(employee);
@@ -96,6 +104,7 @@ namespace employeehub_api.Controllers
 
             return Ok(employee);
         }
+
 
         // Add a Department 
         [HttpPost("department/addDepartment")]
@@ -129,7 +138,7 @@ namespace employeehub_api.Controllers
                 employee.email = updateEmployeeRequest.email;
                 employee.salary = updateEmployeeRequest.salary;
                 employee.dob = updateEmployeeRequest.dob;
-                employee.departmentName = updateEmployeeRequest.departmentName;
+                //employee.departmentName = updateEmployeeRequest.departmentName;
 
                 await dbContext.SaveChangesAsync();
                 return Ok(employee);
