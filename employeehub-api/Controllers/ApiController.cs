@@ -21,9 +21,22 @@ namespace employeehub_api.Controllers
         [HttpGet("employee/getAllEmployees")]
         public IActionResult getAllEmployees()
         {
-            return Ok(dbContext.Employee.ToList());
+            var employees = dbContext.Employee.ToList();
+
+            var formattedEmployees = employees.Select(e => new {
+                e.Id,
+                e.firstName,
+                e.lastName,
+                e.email,
+                e.salary,
+                e.age,
+                e.departmentName,
+                Dob = e.dob.ToString("yyyy-MM-dd"),
+            });
+
+            return Ok(formattedEmployees);
         }
-        
+
         // Retrieve all Departments 
         [HttpGet("department/getAllDepartments")]
         public IActionResult getAllDepartments()
@@ -43,7 +56,19 @@ namespace employeehub_api.Controllers
                 return NotFound();
             }
 
-            return Ok(employee);
+            var formattedEmployees = new
+            {
+                employee.Id,
+                employee.firstName,
+                employee.lastName,
+                employee.email,
+                employee.salary,
+                employee.age,
+                employee.departmentName,
+                dob = employee.dob.ToString("yyyy-MM-dd"),
+            };
+
+            return Ok(formattedEmployees);
         }
 
         // Retrieve specific Department using Department ID
