@@ -13,6 +13,6 @@ namespace employeehub_api.Models
         public DateTime dob { get; set; }
         public int age { get; set; }
 
-        public Guid departmentId { get; set; }
+        public string departmentName { get; set; }
     }
 }

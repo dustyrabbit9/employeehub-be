@@ -46,8 +46,9 @@ namespace employeehub_api.Migrations
                     b.Property<int>("age")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("departmentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("departmentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("dob")
                         .HasColumnType("datetime2");

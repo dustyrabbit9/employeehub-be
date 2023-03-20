@@ -34,7 +34,7 @@ namespace employeehub_api.Migrations
                     salary = table.Column<double>(type: "float", nullable: false),
                     dob = table.Column<DateTime>(type: "datetime2", nullable: false),
                     age = table.Column<int>(type: "int", nullable: false),
-                    departmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    departmentName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

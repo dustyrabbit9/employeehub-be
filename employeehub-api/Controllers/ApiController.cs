@@ -48,7 +48,7 @@ namespace employeehub_api.Controllers
 
         // Retrieve specific Department using Department ID
         [HttpGet]
-        [Route("employee/getOneDepartment/{id:guid}")]
+        [Route("department/getOneDepartment/{id:guid}")]
         public async Task<IActionResult> getOneDepartment([FromRoute] Guid id)
         {
             var department = await dbContext.Department.FindAsync(id);
@@ -61,6 +61,7 @@ namespace employeehub_api.Controllers
             return Ok(department);
         }
 
+        /*
         // Retrieve all Employees relating to a Department using departmentId
         [HttpGet]
         [Route("employee/getEmployeeByDepartmentId/{id:guid}")]
@@ -75,18 +76,21 @@ namespace employeehub_api.Controllers
 
             return Ok(employees);
         }
+        */
 
         // Add an Employee 
         [HttpPost("employee/addEmployee")]
         public async Task<IActionResult> addEmployee(AddEmployeeRequest addEmployeeRequest)
         {
+            /*
             // Check if entered department exists
-            var department = await dbContext.Department.FindAsync(addEmployeeRequest.DepartmentId);
+            var department = await dbContext.Department.FindAsync(addEmployeeRequest.DepardetmentId);
 
             if (department == null)
             {
                 return NotFound("Department Not Found");
             }
+            */
 
             var employee = new Employee()
             {
@@ -96,7 +100,7 @@ namespace employeehub_api.Controllers
                 email = addEmployeeRequest.email,
                 salary = addEmployeeRequest.salary,
                 dob = addEmployeeRequest.dob,
-                departmentId = addEmployeeRequest.DepartmentId
+                departmentName = addEmployeeRequest.departmentName
             };
 
             employee.age = (int)((DateTime.Now - employee.dob).TotalDays / 365.242199);
@@ -145,9 +149,9 @@ namespace employeehub_api.Controllers
                 employee.email = updateEmployeeRequest.email;
                 employee.salary = updateEmployeeRequest.salary;
                 employee.dob = updateEmployeeRequest.dob;
-                //employee.departmentName = updateEmployeeRequest.departmentName;
+                employee.departmentName = updateEmployeeRequest.departmentName;
 
-                employee.age = (int)((DateTime.Now - employee.dob).TotalDays / 365.242199);
+                // employee.age = (int)((DateTime.Now - employee.dob).TotalDays / 365.242199);
 
                 await dbContext.SaveChangesAsync();
                 return Ok(employee);
