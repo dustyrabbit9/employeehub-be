@@ -16,7 +16,7 @@ namespace employeehub_api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    departmentName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    departmentName = table.Column<string>(type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,13 +28,13 @@ namespace employeehub_api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    firstName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    lastName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     salary = table.Column<double>(type: "float", nullable: false),
                     dob = table.Column<DateTime>(type: "datetime2", nullable: false),
                     age = table.Column<int>(type: "int", nullable: false),
-                    departmentName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    departmentName = table.Column<string>(type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
