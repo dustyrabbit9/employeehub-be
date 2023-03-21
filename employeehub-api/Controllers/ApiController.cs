@@ -86,22 +86,6 @@ namespace employeehub_api.Controllers
             return Ok(department);
         }
 
-        /*
-        // Retrieve all Employees relating to a Department using departmentId
-        [HttpGet]
-        [Route("employee/getEmployeeByDepartmentId/{id:guid}")]
-        public async Task<IActionResult> getEmployeeByDepartment([FromRoute] Guid id)
-        {
-            var employees = await dbContext.Employee.Where(e => e.departmentId == id).ToListAsync();
-
-            if (employees == null || employees.Count == 0)
-            {
-                return NotFound();
-            }
-
-            return Ok(employees);
-        }
-        */
 
         // Add an Employee 
         [HttpPost("employee/addEmployee")]
@@ -201,24 +185,6 @@ namespace employeehub_api.Controllers
                 await dbContext.SaveChangesAsync();
                 return Ok(department);
 
-            }
-
-            return NotFound("Department Not Found");
-        }
-
-        // Update a Department based on departmentName
-        [HttpPut]
-        [Route("department/updateDepartment/{departmentName}")]
-        public async Task<IActionResult> UpdateDepartment([FromRoute] string departmentName, UpdateDepartmentRequest updateDepartmentRequest)
-        {
-            var department = await dbContext.Department.FirstOrDefaultAsync(d => d.departmentName == departmentName);
-
-            if (department != null)
-            {
-                department.departmentName = updateDepartmentRequest.departmentName;
-
-                await dbContext.SaveChangesAsync();
-                return Ok(department);
             }
 
             return NotFound("Department Not Found");
